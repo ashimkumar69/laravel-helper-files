@@ -1,0 +1,17 @@
+    $url = url('/oauth/token');
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => env('CORE_CLIENT_ID'),
+            'client_secret' => env('CORE_CLIENT_SECRET'),
+            'username' => $request->email,
+            'password' => $request->password,
+            'scope' => '',
+        ]);
+
+        $tokenRequest = Request::create(
+            $url,
+            'post'
+        );
+        $response = Route::dispatch($tokenRequest);
+
+        return $response;
