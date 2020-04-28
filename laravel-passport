@@ -15,3 +15,22 @@
         $response = Route::dispatch($tokenRequest);
 
         return $response;
+        
+        refresh token 
+        
+            $url = url('/oauth/token');
+        $request->request->add([
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $request->refresh_token,
+            'client_id' => env('CORE_CLIENT_ID'),
+            'client_secret' => env('CORE_CLIENT_SECRET'),
+            'scope' => '',
+        ]);
+
+        $tokenRequest = Request::create(
+            $url,
+            'post'
+        );
+        $response = Route::dispatch($tokenRequest);
+
+        return $response;
